@@ -10,8 +10,6 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import java.util.Date;
-
 /**
  * The reservationValidation class provides methods for validating reservationRequestDto objects.
  * It checks for the presence and validity of essential fields in a booking history request.

@@ -56,10 +56,13 @@ public class Reservation {
      *     The attribute is mapped by the {@code company} attribute of the {@code Company} class.
      * </p>
      */
-    @ManyToOne
-    @JoinColumn(name="idCompany", nullable = false, foreignKey = @ForeignKey(name="FK_reservation_company"))
-    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Company company;
+    //@JoinColumn(name="idCompany", nullable = false, foreignKey = @ForeignKey(name="FK_reservation_company"))
+    //@ManyToOne
+    //@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+    //private Company company;
+
+    @Column(name="idCompany", nullable = false)
+    private Long companyId;
 
     /**
      * The client of the booking history.
@@ -69,10 +72,13 @@ public class Reservation {
      *     The attribute is mapped by the {@code client} attribute of the {@code Client} class.
      * </p>
      */
-    @ManyToOne
+    /*@ManyToOne
     @JoinColumn(name="idClient", nullable = false, foreignKey = @ForeignKey(name="FK_reservation_client"))
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-    private Customer customer;
+    private Customer customer;*/
+
+    @Column(name="idClient", nullable = false)
+    private Long customerId;
 
     /**
      * The moving date of the booking history.

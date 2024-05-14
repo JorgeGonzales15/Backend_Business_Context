@@ -7,9 +7,10 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDate;
 
 /**
- * This class represents the response of the booking history
- * @author Grupo1
- * @version 1.0
+
+ This class represents the response of the booking history
+ @author Grupo1
+ @version 1.0
  */
 @Data
 @NoArgsConstructor
@@ -26,6 +27,6 @@ public class ReservationResponseDto {
     private String status;
     private String services;
     private Long chatId;
-    private Customer customer;
-    private String companyName;
+    private String customerId;
+    private String companyId;
 }
