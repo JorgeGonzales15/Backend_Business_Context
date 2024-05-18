@@ -17,19 +17,6 @@ public class swaggerConfig {
                     .title("Carga Sin Estres")
                     .description("Documentación del backend de Carga Sin Estres")
                     .version("1.0.0")
-                )
-                .addSecurityItem(new SecurityRequirement()
-                        .addList("JwtScheme")
-                )
-                .components(new Components()
-                        //JWT
-                        .addSecuritySchemes("JwtScheme",
-                                new SecurityScheme()
-                                        .type(SecurityScheme.Type.HTTP)
-                                        .description("Autorizar por un token JWT")
-                                        .scheme("bearer")
-                                        .bearerFormat("JWT")
-                        )
                 );
     }
 }
