@@ -6,8 +6,6 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @NoArgsConstructor
@@ -22,7 +20,7 @@ public class Servicio {
     @Column(name = "name", nullable = false)
     private String name;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    /*@ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(
             name = "reservation_service", // Nombre de la tabla de unión
             joinColumns = @JoinColumn(name = "service_id"), // Columna que hace referencia a la entidad actual (Servicio)
@@ -31,5 +29,5 @@ public class Servicio {
     private List<Reservation> reservations;
 
     @ManyToMany(mappedBy = "servicios")
-    private List<Company> companies;
+    private List<Company> companies;*/
 }

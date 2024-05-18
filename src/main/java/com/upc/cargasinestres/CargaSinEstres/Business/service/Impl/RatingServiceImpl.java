@@ -15,28 +15,25 @@ import org.springframework.stereotype.Service;
 public class RatingServiceImpl implements IRatingService {
 
     private final IRatingRepository ratingRepository;
-    private final ICompanyRepository companyRepository;
     private final ModelMapper modelMapper;
 
-    public RatingServiceImpl(IRatingRepository ratingRepository, ICompanyRepository companyRepository, ModelMapper modelMapper) {
+    public RatingServiceImpl(IRatingRepository ratingRepository,     ModelMapper modelMapper) {
         this.ratingRepository = ratingRepository;
-        this.companyRepository = companyRepository;
         this.modelMapper = modelMapper;
     }
 
     @Override
     public RatingResponseDto createRating(Long companyId, RatingRequestDto ratingRequestDto) {
         var newRating = modelMapper.map(ratingRequestDto, Rating.class);
-        var company = companyRepository.findCompanyById(companyId);
 
-        newRating.setCompany(company);
+        newRating.setCompanyId(companyId);
         RatingValidation.ValidateRating(ratingRequestDto);
 
         var createdRating = ratingRepository.save(newRating);
 
         // Agregar el nuevo rating a la lista de ratings en la entidad Company
-        company.getRatings().add(createdRating);
-        companyRepository.save(company);
+        /*company.getRatings().add(createdRating);
+        companyRepository.save(company);*/
 
         return modelMapper.map(createdRating, RatingResponseDto.class);
     }

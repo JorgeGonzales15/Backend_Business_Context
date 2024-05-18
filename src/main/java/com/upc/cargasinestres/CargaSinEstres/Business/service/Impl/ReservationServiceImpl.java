@@ -30,16 +30,11 @@ public class ReservationServiceImpl implements IReservationService {
 
     private final IReservationRepository reservationRepository;
     private final ModelMapper modelMapper;
-    private final ICustomerRepository customerRepository;
-    private final ICompanyRepository companyRepository;
 
     @Autowired
-    public ReservationServiceImpl(IReservationRepository reservationRepository, ModelMapper modelMapper,
-                                  ICustomerRepository customerRepository, ICompanyRepository companyRepository) { //, IChatRepository chatRepository
+    public ReservationServiceImpl(IReservationRepository reservationRepository, ModelMapper modelMapper) { //, IChatRepository chatRepository
         this.reservationRepository = reservationRepository;
         this.modelMapper = modelMapper;
-        this.customerRepository = customerRepository;
-        this.companyRepository = companyRepository;
     }
 
     /**
@@ -54,20 +49,20 @@ public class ReservationServiceImpl implements IReservationService {
     //Method : POST
     @Override
     public ReservationResponseDto createReservation(Long customerId, Long companyId, ReservationRequestDto reservationRequestDto) {
-        // Buscar la cuenta
+        /*// Buscar la cuenta
         var client = customerRepository.findById(customerId)
                 .orElseThrow(() -> new ResourceNotFoundException("No se encontró el cliente con ID: " + customerId));
 
         var company = companyRepository.findById(companyId)
-                .orElseThrow(() -> new ResourceNotFoundException("No se encontró la empresa con ID: " + companyId));
+                .orElseThrow(() -> new ResourceNotFoundException("No se encontró la empresa con ID: " + companyId));*/
 
         // Validación
         ReservationValidation.ValidateReservation(reservationRequestDto);
 
         // Mapeo
         var newReservation = modelMapper.map(reservationRequestDto, Reservation.class);
-        newReservation.setCustomer(client);
-        newReservation.setCompany(company);
+        newReservation.setCustomerId(customerId);
+        newReservation.setCompanyId(companyId);
         newReservation.setServices(newReservation.getServices().toLowerCase());
         newReservation.setStartTime(LocalTime.parse(reservationRequestDto.getStartTime()));
 
@@ -75,7 +70,6 @@ public class ReservationServiceImpl implements IReservationService {
 
         var savedreservation = reservationRepository.save(newReservation);
         var response = modelMapper.map(savedreservation, ReservationResponseDto.class);
-        response.setCompanyName(company.getName());
         return response;
     }
 

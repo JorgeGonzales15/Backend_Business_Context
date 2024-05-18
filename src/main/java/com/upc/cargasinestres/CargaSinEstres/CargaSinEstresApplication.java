@@ -1,8 +1,5 @@
 package com.upc.cargasinestres.CargaSinEstres;
 
-import com.upc.cargasinestres.CargaSinEstres.Shared.util.Utilities;
-import com.upc.cargasinestres.CargaSinEstres.Users.model.enums.ERole;
-import com.upc.cargasinestres.CargaSinEstres.Users.repository.IRoleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.boot.CommandLineRunner;
@@ -12,11 +9,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
-
-
-//jdbc:mysql://viaduct.proxy.rlwy.net:44692/railway?useSSL=false&serverTimezone=UTC //a la db desplegada
-
-//eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJlQGdtYWlsLmNvbSIsImlhdCI6MTcwMDE1MTYzMSwiZXhwIjoxNzAyNzQzNjMxLCJyb2xlcyI6WyJST0xFX1VTRVIiXX0.NmGugKKb4Rmx8grtAQMHH7ZqFfHXp3n1SVNISoZdORI
 
 /**
  * The CargaSinEstresApplication class is the main entry point for the Carga Sin Estres application.
@@ -58,17 +50,4 @@ public class CargaSinEstresApplication {
 		SpringApplication.run(CargaSinEstresApplication.class, args);
 	}
 
-	/**
-	 * Initializes the database with user roles during application startup.
-	 *
-	 * @param roleRepository The repository for managing user roles.
-	 * @return A CommandLineRunner to execute role initialization during application startup.
-	 */
-	@Bean
-	CommandLineRunner initDatabase(IRoleRepository roleRepository) {
-		return args -> {
-			Utilities.insertRoleIfNotFound(roleRepository, ERole.ROLE_USER);
-			Utilities.insertRoleIfNotFound(roleRepository, ERole.ROLE_ADMIN);
-		};
-	}
 } //http://localhost:8080/swagger-ui/index.html
